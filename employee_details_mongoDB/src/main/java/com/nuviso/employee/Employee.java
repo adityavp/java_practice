@@ -1,19 +1,15 @@
 package com.nuviso.employee;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import org.springframework.data.annotation.Id;
 
-@Entity
 public class Employee {
 
 	@Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-	private long employeeId;
+	private String employeeId;
+	
 	private String firstName;
 	private String lastName;
-	private String emailId;
+	private String emailId;       // unique
 	private String mobileNo;
 	private String phoneNo;       // Optional
 	private String address;
@@ -22,7 +18,7 @@ public class Employee {
 		
 	}
 	
-	public Employee(long employeeId, String firstName, String lastName, String emailId, String mobileNo,
+	public Employee(String employeeId, String firstName, String lastName, String emailId, String mobileNo,
 			String address) {
 		super();
 		this.employeeId = employeeId;
@@ -33,10 +29,10 @@ public class Employee {
 		this.address = address;
 	}
 	
-	public long getEmployeeId() {
+	public String getEmployeeId() {
 		return employeeId;
 	}
-	public void setEmployeeId(long employeeId) {
+	public void setEmployeeId(String employeeId) {
 		this.employeeId = employeeId;
 	}
 	public String getFirstName() {

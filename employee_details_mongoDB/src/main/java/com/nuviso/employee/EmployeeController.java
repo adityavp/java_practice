@@ -21,7 +21,7 @@ public class EmployeeController {
 	}
 	
 	@RequestMapping("/employees/{employeeId}")
-	public Employee getOne(@PathVariable long employeeId) {
+	public Employee getOne(@PathVariable String employeeId) {
 		return empSer.getEmployeeByEmpId(employeeId);
 	}
 	
@@ -39,10 +39,12 @@ public class EmployeeController {
 	}
 	
 	@RequestMapping(method=RequestMethod.PUT,value="/employees/{employeeId}")
-	public String updateExisting(@RequestBody Employee updateEmployee, @PathVariable long employeeId) {
+	public String updateExisting(@RequestBody Employee updateEmployee, @PathVariable String employeeId) {
 		// Validate received data
 		if(updateEmployee.getFirstName() == null || updateEmployee.getLastName() == null || updateEmployee.getEmailId() == null || updateEmployee.getMobileNo() == null || updateEmployee.getAddress() == null)				
 			return "\n\nSome required fields are empty\n";
+		else if(empSer.isDuplicate(updateEmployee.getEmailId()))
+			return "\n\nEmailID Duplicate\n";
 		else if(updateEmployee.getMobileNo().length() != 10)
 			return "\n\nMobile number should be 10 digits\n";
 		else
@@ -50,7 +52,7 @@ public class EmployeeController {
 	}
 	
 	@RequestMapping(method=RequestMethod.DELETE, value="/employees/{employeeId}")
-	public String deleteOne(@PathVariable long employeeId) {
+	public String deleteOne(@PathVariable String employeeId) {
 		return empSer.deleteEmployeeByEmpId(employeeId);
 	}
 	

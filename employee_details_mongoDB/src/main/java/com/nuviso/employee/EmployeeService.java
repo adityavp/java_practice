@@ -21,7 +21,6 @@ public class EmployeeService {
 				return false;
 		}
 		
-	
 	// GET
 	public ArrayList<Employee> getAllEmployee() {
 		// Empty List to re populate
@@ -32,28 +31,28 @@ public class EmployeeService {
 	}
 	
 	// GET
-	public Employee getEmployeeByEmpId(long employeeId) {
+	public Employee getEmployeeByEmpId(String employeeId) {
 		return empList.findOne(employeeId);
 	}
 	
 	// POST
 	public String postNewEmployee(Employee newEmployee) {
-		if(empList.save(newEmployee) != null)
+		if(empList.insert(newEmployee) != null) 
 			return "\n\nSuccess\n";
 		else
 			return "\n\nFailed\n";
 	}
 	
 	// PUT
-	public String putEmployee(Employee updateEmployee, long employeeId) {
-		if(empList.save(updateEmployee) != null)
+	public String putEmployee(Employee updateEmployee, String employeeId) {
+		if(empList.insert(updateEmployee) != null)
 			return "\n\nSuccess\n";
 		else
 			return "\n\nFailed\n";
 	}
 	
 	// DELETE
-	public String deleteEmployeeByEmpId(long employeeId) {
+	public String deleteEmployeeByEmpId(String employeeId) {
 		empList.delete(employeeId);
 			return "\n\nSuccess\n";
 	}
